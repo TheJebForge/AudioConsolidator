@@ -145,6 +145,8 @@ public partial class MainWindowViewModel : ViewModelBase {
 		Task.Run(
 			() => {
 				try {
+					Directory.CreateDirectory(OutputPath);
+					
 					foreach (var group in Groups) {
 						var files = group.Files.Where(i => i.Source is not null)
 							.Select(i => WebUtility.UrlDecode(i.Source!.AbsolutePath))

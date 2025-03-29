@@ -11,9 +11,9 @@
         Title="AudioConsolidator">
 
     <Panel Margin="5">
-        <Grid RowDefinitions="Auto,*,Auto" IsEnabled="{Binding BinariesReady}">
+        <Grid RowDefinitions="Auto,*,Auto">
             <Grid ColumnDefinitions="*,*">
-                <WrapPanel>
+                <WrapPanel IsEnabled="{Binding BinariesReady}">
                     <Button Command="{Binding OpenYoutubeDownloaderCommand}">
                         Youtube Downloader
                     </Button>
@@ -22,10 +22,12 @@
                     </Button>
                 </WrapPanel>
                 <WrapPanel Grid.Column="1" HorizontalAlignment="Right">
-                    <Button Name="CmdButton">Show Cmd Log</Button>
+                    <Button Name="CmdButton">
+                        Show Cmd Log
+                    </Button>
                 </WrapPanel>
             </Grid>
-            <Grid ColumnDefinitions="*,*" Grid.Row="1">
+            <Grid ColumnDefinitions="*,*" Grid.Row="1" IsEnabled="{Binding BinariesReady}">
                 <Border Classes="Low" Margin="5">
 
                     <Grid RowDefinitions="Auto,*">
@@ -120,7 +122,7 @@
                     </Grid>
                 </Border>
             </Grid>
-            <Grid ColumnDefinitions="*,Auto" Grid.Row="2">
+            <Grid ColumnDefinitions="*,Auto" Grid.Row="2" IsEnabled="{Binding BinariesReady}">
                 <Grid ColumnDefinitions="*,200" Margin="10">
                     <StackPanel>
                         <TextBlock>Output Path:</TextBlock>
