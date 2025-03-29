@@ -1,0 +1,26 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:AudioConsolidator.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AudioConsolidator.Views.ExportWindow"
+        x:DataType="viewModels:ExportWindowViewModel"
+        Width="600" Height="450"
+        SystemDecorations="BorderOnly"
+        Title="Export Window">
+    <Grid RowDefinitions="*,Auto">
+        <Border Margin="10" Padding="10" Background="{DynamicResource SystemChromeMediumColor}" 
+                CornerRadius="10">
+            <ScrollViewer Name="LogScroll">
+                <SelectableTextBlock Name="LogBlock" Text="{Binding LogContents}" TextWrapping="Wrap"/>
+            </ScrollViewer>
+        </Border>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Right" IsEnabled="{Binding Done}"
+                    Orientation="Horizontal" Spacing="5">
+            <Button Command="{Binding Close, RelativeSource={RelativeSource AncestorType=Window}}">
+                Close
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

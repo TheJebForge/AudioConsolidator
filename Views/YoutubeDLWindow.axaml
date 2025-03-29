@@ -1,0 +1,51 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:AudioConsolidator.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AudioConsolidator.Views.YoutubeDLWindow"
+        x:DataType="viewModels:YoutubeDLViewModel"
+        Width="600" Height="450"
+        Title="Youtube Downloader">
+    <Border Padding="10" Margin="10" CornerRadius="10" 
+            Background="{DynamicResource SystemChromeMediumColor}">
+        <Grid RowDefinitions="Auto,*,Auto">
+            <StackPanel Spacing="5" IsEnabled="{Binding !Downloading}">
+                <StackPanel Orientation="Horizontal" Spacing="5">
+                    <RadioButton GroupName="Download" IsChecked="{Binding DownloadIndividualSongs}">
+                        Download individual links
+                    </RadioButton>
+                    <RadioButton GroupName="Download" IsChecked="{Binding DownloadPlaylist}">
+                        Download playlist
+                    </RadioButton>
+                </StackPanel>
+                <StackPanel IsVisible="{Binding DownloadIndividualSongs}">
+                    <TextBlock>Links:</TextBlock>
+                    <TextBox AcceptsReturn="True" Text="{Binding Links}" Height="100"/>
+                </StackPanel>
+                <StackPanel IsVisible="{Binding DownloadPlaylist}">
+                    <TextBlock>Playlist Link:</TextBlock>
+                    <TextBox Text="{Binding PlaylistLink}"/>
+                </StackPanel>
+            </StackPanel>
+            <Border Grid.Row="1" Margin="0, 10" Padding="10" 
+                    Background="{DynamicResource SystemBaseLowColor}" 
+                    CornerRadius="10">
+                <ScrollViewer Name="LogScroll">
+                    <SelectableTextBlock Name="LogBlock" Text="{Binding LogContents}" TextWrapping="Wrap"/>
+                </ScrollViewer>
+            </Border>
+            <Grid ColumnDefinitions="*,Auto" Grid.Row="2">
+                <StackPanel>
+                    <TextBlock Text="{Binding ProgressLabel}"/>
+                    <ProgressBar Value="{Binding Progress}"/>
+                </StackPanel>
+                <Button Grid.Column="1" Margin="10, 0, 0, 0"
+                        Command="{Binding DownloadCommand}">
+                    Download
+                </Button>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
