@@ -5,6 +5,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using AudioConsolidator.Utils;
@@ -53,13 +54,22 @@ public partial class App : Application {
 					Directory.CreateDirectory(DownloadedPath);
 					
 					Console.WriteLine("Checking for binaries and downloading missing ones...");
-					
 					await YoutubeDLSharp.Utils.DownloadBinaries(true, BinPath);
 					
 					YoutubeDl = new() {
-						OutputFolder = DownloadedPath
+						OutputFolder = DownloadedPath,
+						YoutubeDLPath = Path.Join(
+							BinPath,
+							RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+								? "yt-dlp.exe"
+								: "yt-dlp"
+						)
 					};
+					
+					Console.WriteLine("Checking for yt-dlp updates...");
 					Console.WriteLine(await YoutubeDl.RunUpdate());
+					
+					Console.WriteLine("Setting paths for ffmpeg...");
 					GlobalFFOptions.Configure(
 						options => {
 							options.BinaryFolder = BinPath;
