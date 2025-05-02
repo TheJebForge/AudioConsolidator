@@ -64,13 +64,16 @@ public partial class MainWindowViewModel : ViewModelBase {
 	[ObservableProperty]
 	private int _bitrate = 320;
 
+	[ObservableProperty]
+	private string _nameTemplate = "Side";
+
 	public void AddFile(IStorageItem file) {
 		AvailableFiles.Add(new(file, AvailableFiles));
 	}
 
 	[RelayCommand]
 	private void AddGroup() {
-		Groups.Add(new($"Side{Groups.Count + 1}"));
+		Groups.Add(new($"{NameTemplate}{Groups.Count + 1}"));
 	}
 
 	[RelayCommand]
